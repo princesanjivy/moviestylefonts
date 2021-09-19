@@ -1,0 +1,26 @@
+name: msf
+description: Get your name in your favorite movie fonts
+version: 3.0.1+12
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  dynamic_cached_fonts: ^0.3.0
+  path_provider: ^2.0.2
+  google_fonts: ^2.1.0
+  shared_preferences: ^2.0.6
+  firebase_messaging: ^10.0.5
+  cached_network_image: ^3.1.0
+  carousel_slider: ^4.0.0
+  http: ^0.13.3
+  google_mobile_ads: ^0.13.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
