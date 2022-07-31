@@ -28,7 +28,7 @@ saveImage(
             ),
           ));
 
-  final platform = const MethodChannel('com.princewebstudio.msfonts/save');
+  final platform = const MethodChannel('princewebstudio.msf/save');
 
   final RenderRepaintBoundary boundary =
       globalKey.currentContext!.findRenderObject()! as RenderRepaintBoundary;

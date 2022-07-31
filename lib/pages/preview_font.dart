@@ -298,7 +298,7 @@ class _PreviewFontState extends State<PreviewFont> {
                                           ? () {
                                               rewardedAd.show(
                                                 onUserEarnedReward:
-                                                    (RewardedAd ad,
+                                                    (AdWithoutView ad,
                                                         RewardItem rewardItem) {
                                                   // Reward the user for watching an ad.
                                                   setState(() {

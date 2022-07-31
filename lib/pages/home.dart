@@ -57,6 +57,8 @@ class _HomeState extends State<Home> {
   }
 
   getCategories() async {
+    print("Loading data from github");
+
     setState(() {
       loading = true;
     });
