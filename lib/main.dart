@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:msf/constants.dart';
+import 'package:msf/firebase_keys.dart' as creds;
 import 'package:msf/helpers/show_interstitial_ad.dart';
 import 'package:msf/pages/home.dart';
 
@@ -17,12 +18,19 @@ void main() async {
 
   // MobileAds.instance.updateRequestConfiguration(
   //   RequestConfiguration(
-  //     testDeviceIds: ["4603548B2FE5102EF89FAAB3102DE469"],
+  //     testDeviceIds: ["44C21CA2B517E5E19D6F9D510C330CA2"],
   //   ),
   // );
   MobileAds.instance.initialize();
 
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: FirebaseOptions(
+      apiKey: creds.apiKey,
+      appId: creds.appId,
+      messagingSenderId: creds.messagingSenderId,
+      projectId: creds.projectId,
+    ),
+  );
   FirebaseMessaging.instance.subscribeToTopic("all"); // For Notification
 
   FullScreenAd object = FullScreenAd(); // Load Ad
@@ -41,7 +49,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       theme: ThemeData(
         scaffoldBackgroundColor: primaryColor,
-        accentColor: primaryColor,
+        // hintColor: primaryColor,
         textSelectionTheme: TextSelectionThemeData(
           cursorColor: secondaryColor,
           selectionHandleColor: secondaryColor,
