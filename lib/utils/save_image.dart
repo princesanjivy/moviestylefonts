@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:msf/components/my_text.dart';
 import 'package:msf/constants.dart';
+import 'package:shared_storage/shared_storage.dart' as saf;
 
 saveImage(
   GlobalKey globalKey,
@@ -28,8 +29,6 @@ saveImage(
             ),
           ));
 
-  final platform = const MethodChannel('princewebstudio.msf/save');
-
   final RenderRepaintBoundary boundary =
       globalKey.currentContext!.findRenderObject()! as RenderRepaintBoundary;
   final ui.Image image = await boundary.toImage(pixelRatio: 3);
@@ -37,18 +36,18 @@ saveImage(
       await image.toByteData(format: ui.ImageByteFormat.png);
   final Uint8List pngBytes = byteData!.buffer.asUint8List();
 
-  try {
-    await platform.invokeMethod(
-      "image",
-      {
-        "bytes": pngBytes,
-        "name": name,
-      },
-    ).then((value) {
-      print(value);
-    });
-  } on PlatformException catch (e) {
-    print(e.message);
+  final Uri? grantedUri =
+      await saf.openDocumentTree(grantWritePermission: true);
+
+  if (grantedUri != null) {
+    print('Now I have permission over this Uri: $grantedUri');
+
+    saf.createFileAsBytes(
+      grantedUri,
+      mimeType: "image/png",
+      displayName: name,
+      bytes: pngBytes,
+    );
   }
 
   Navigator.pop(context);
